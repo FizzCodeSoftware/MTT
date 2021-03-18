@@ -8,7 +8,7 @@
     {
         public static void Main(string[] args)
         {
-            if (args.Length != 2)
+            if (args.Length < 2)
             {
                 Console.WriteLine("Assuming testing...");
 
@@ -28,7 +28,10 @@
                 new ConvertServiceParameters()
                 {
                     WorkingDirectory = args[0],
-                    ConvertDirectory = args[1]
+                    ConvertDirectory = args[1],
+                    ConvertToType = args.Length >=3 ? ConvertMainConfiguration.ConvertToEnum<ConvertToType>(args[2]) : ConvertToType.Interface,
+                    PathStyle = args.Length >= 4 ? ConvertMainConfiguration.ConvertToEnum<PathStyle>(args[3]) : PathStyle.Default,
+                    IsModelInTSFileName = args.Length >= 5 && bool.Parse(args[4])
                 });
 
             convertService.Execute();

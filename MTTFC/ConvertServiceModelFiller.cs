@@ -8,7 +8,7 @@
 
     public static class ConvertServiceModelFiller
     {
-        public static void BreakDown(List<ModelFile> models, string localWorkingDir)
+        public static void BreakDown(List<ModelFile> models, string localWorkingDir, bool isModelInTSFileName)
         {
             foreach (var file in models)
             {
@@ -81,7 +81,7 @@
                                     isImplicit = true;
                                 }
 
-                                EnumObject obj = new EnumObject()
+                                var obj = new EnumObject()
                                 {
                                     Name = name.Replace(",", ""),
                                     Value = value,
@@ -109,10 +109,11 @@
                                 inheritance = inheritance.Substring(0, commaIndex);
                             }
                             file.Inherits = inheritance;
-                            file.InheritenceStructure = Find(models, inheritance, file, localWorkingDir);
+                            file.InheritenceStructure = Find(models, inheritance, file, localWorkingDir)
+                                + (isModelInTSFileName ? ".model" : "");
 
-                            /** If the class only contains inheritence we need a place holder obj */
-                            LineObject obj = new LineObject();
+                            // If the class only contains inheritence we need a place holder obj
+                            var obj = new LineObject();
                             file.Objects.Add(obj);
                         }
                     }
@@ -143,7 +144,7 @@
                                 varName = varName[0..^1];
                             }
 
-                            LineObject obj = new LineObject()
+                            var obj = new LineObject()
                             {
                                 VariableName = varName,
                                 Type = "Map",
@@ -165,17 +166,15 @@
                                 var userDefinedImport = Find(models, innerType, file, localWorkingDir);
                                 var isUserDefined = !String.IsNullOrEmpty(userDefinedImport);
 
-                                LineObject lo = new LineObject()
+                                obj.Container[index] = new LineObject()
                                 {
                                     VariableName = "",
                                     Type = isUserDefined ? innerType : TypeOf(innerType),
                                     IsArray = false,
                                     IsOptional = false,
                                     UserDefined = isUserDefined,
-                                    UserDefinedImport = userDefinedImport
+                                    UserDefinedImport = userDefinedImport + (isModelInTSFileName ? ".model" : "")
                                 };
-
-                                obj.Container[index] = lo;
                                 index++;
                             }
 
@@ -183,10 +182,12 @@
                         }
                         else
                         {
-                            type = CleanType(type);
+                            string newType;
+                            bool isList = CheckList(type);
+                            newType = isList ? type.Replace("List<", "").Replace(">", "") : CleanType(type);
 
-                            var userDefinedImport = Find(models, type, file, localWorkingDir);
-                            var isUserDefined = !String.IsNullOrEmpty(userDefinedImport);
+                            var userDefinedImport = Find(models, newType, file, localWorkingDir);
+                            var isUserDefined = !string.IsNullOrEmpty(userDefinedImport);
 
                             string varName = modLine[1];
 
@@ -195,14 +196,16 @@
                                 varName = varName[0..^1];
                             }
 
-                            LineObject obj = new LineObject()
+                            string typeToObject = isUserDefined ? newType : TypeOf(newType);
+
+                            var obj = new LineObject()
                             {
                                 VariableName = varName,
-                                Type = isUserDefined ? type : TypeOf(type),
+                                Type = typeToObject,
                                 IsArray = isArray,
                                 IsOptional = isOptional,
                                 UserDefined = isUserDefined,
-                                UserDefinedImport = userDefinedImport
+                                UserDefinedImport = userDefinedImport + (isModelInTSFileName ? ".model" : "")
                             };
 
                             file.Objects.Add(obj);
@@ -356,8 +359,8 @@
 
         private static string GetRelativePath(string from, string to)
         {
-            Uri path1 = new Uri(from.Replace("\\", "/"));
-            Uri path2 = new Uri(to.Replace("\\", "/"));
+            var path1 = new Uri(from.Replace("\\", "/"));
+            var path2 = new Uri(to.Replace("\\", "/"));
 
             var rel = path1.MakeRelativeUri(path2);
 
@@ -384,6 +387,11 @@
         private static bool CheckDictionary(string type)
         {
             return (type.Contains("Dictionary") || type.Contains("IDictionary")) && type.Contains("<") && type.Contains(">") && type.Contains(",");
+        }
+
+        private static bool CheckList(string type)
+        {
+            return type.StartsWith("List<");
         }
 
         private static string CleanType(string type)
