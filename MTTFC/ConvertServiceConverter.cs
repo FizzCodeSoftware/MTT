@@ -165,20 +165,27 @@
                                 }
                                 else
                                 {
-                                    switch (obj.Type)
+                                    if (obj.UserDefined)
                                     {
-                                        case "number":
-                                            str += "0";
-                                            break;
-                                        case "string":
-                                            str += "''";
-                                            break;
-                                        case "boolean":
-                                            str += "false";
-                                            break;
-                                        case "Date":
-                                            str += "new Date()";
-                                            break;
+                                        str += "new " + obj.Type + "()";
+                                    }
+                                    else
+                                    {
+                                        switch (obj.Type)
+                                        {
+                                            case "number":
+                                                str += "0";
+                                                break;
+                                            case "string":
+                                                str += "''";
+                                                break;
+                                            case "boolean":
+                                                str += "false";
+                                                break;
+                                            case "Date":
+                                                str += "new Date()";
+                                                break;
+                                        }
                                     }
                                 }
                             }
