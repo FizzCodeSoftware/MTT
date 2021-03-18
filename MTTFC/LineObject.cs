@@ -1,4 +1,4 @@
-namespace MTT
+namespace MTTFC
 {
     public class LineObject
     {
@@ -9,10 +9,10 @@ namespace MTT
         public bool UserDefined { get; set; }
         public string UserDefinedImport { get; set; }
         public LineObject[] Container { get; set; }
-        public bool IsContainer { 
+        public bool IsContainer {
             get {
-                return Container != null ? Container.Length > 0 : false;
+                return Container?.Length > 0;
             }
-        } 
+        }
     }
 }

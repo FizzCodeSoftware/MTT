@@ -1,13 +1,13 @@
 using System.Collections.Generic;
-using System.IO;
+// using System.IO;
 
-namespace MTT
+namespace MTTFC
 {
     public class ModelFile
     {
         public string Name { get; set; }
 
-        public string[] Info { get; set; } 
+        public string[] Info { get; set; }
 
         public string Inherits { get; set; }
 
@@ -26,7 +26,7 @@ namespace MTT
             EnumObjects = new List<EnumObject>();
         }
 
-        public string PrintBasic() {
+        /*public string PrintBasic() {
             return Name.ToString()
             + " : /" + Structure.ToString();
         }
@@ -41,6 +41,6 @@ namespace MTT
             }
 
             return str + "\n";
-        }
+        }*/
     }
 }

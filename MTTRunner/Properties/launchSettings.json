@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "MTTRunner": {
+      "commandName": "Project",
+      "commandLineArgs": "..\\..\\..\\..\\Example\\Resources GeneratedTypescript"
+    }
+  }
+}
