@@ -2,7 +2,7 @@
   "profiles": {
     "MTTRunner": {
       "commandName": "Project",
-      "commandLineArgs": "..\\..\\..\\..\\Example\\Resources GeneratedTypescript"
+      "commandLineArgs": "d:\\Sources\\CAT-TRF\\TRF.Logic\\ViewModel OUT Class Kebab true"
     }
   }
 }
