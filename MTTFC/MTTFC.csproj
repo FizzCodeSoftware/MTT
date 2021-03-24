@@ -1,19 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Description>Converts C# DTOs to Typescript Interfaces or Classes using MSBUILD Tasks.</Description>
+    <Description>Converts C# DTOs to Typescript Interfaces or Classes.</Description>
     <PackageProjectUrl>https://github.com/FizzcodeSoftware/MTT</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="LICENSE" Pack="true" PackagePath="" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Build.Framework" Version="16.9.0" />
-    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="16.9.0" />
+    <None Include="..\LICENSE" Pack="true" PackagePath="" />
   </ItemGroup>
 
 </Project>

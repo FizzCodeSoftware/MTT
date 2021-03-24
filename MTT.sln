@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTTFC", "MTTFC\MTTFC.csproj", "{7A7252AF-3DD7-4313-A2FC-4405F2C01FA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTTFC", "MTTFC\MTTFC.csproj", "{7A7252AF-3DD7-4313-A2FC-4405F2C01FA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTTRunner", "MTTRunner\MTTRunner.csproj", "{F55E28C7-3D08-44E6-ACA5-DF744040D35C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTTRunner", "MTTRunner\MTTRunner.csproj", "{F55E28C7-3D08-44E6-ACA5-DF744040D35C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTTRunner.Tests", "MTTRunner.Tests\MTTRunner.Tests.csproj", "{12D4F45C-CFAE-4289-8E46-B9C3E65DE62B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTTRunner.Tests", "MTTRunner.Tests\MTTRunner.Tests.csproj", "{12D4F45C-CFAE-4289-8E46-B9C3E65DE62B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTTBuildTask", "MTTBuildTask\MTTBuildTask.csproj", "{65964548-1D73-443B-82E5-6817BE843E4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,18 @@ Global
 		{12D4F45C-CFAE-4289-8E46-B9C3E65DE62B}.Release|x64.Build.0 = Release|Any CPU
 		{12D4F45C-CFAE-4289-8E46-B9C3E65DE62B}.Release|x86.ActiveCfg = Release|Any CPU
 		{12D4F45C-CFAE-4289-8E46-B9C3E65DE62B}.Release|x86.Build.0 = Release|Any CPU
+		{65964548-1D73-443B-82E5-6817BE843E4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65964548-1D73-443B-82E5-6817BE843E4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65964548-1D73-443B-82E5-6817BE843E4E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{65964548-1D73-443B-82E5-6817BE843E4E}.Debug|x64.Build.0 = Debug|Any CPU
+		{65964548-1D73-443B-82E5-6817BE843E4E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{65964548-1D73-443B-82E5-6817BE843E4E}.Debug|x86.Build.0 = Debug|Any CPU
+		{65964548-1D73-443B-82E5-6817BE843E4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65964548-1D73-443B-82E5-6817BE843E4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65964548-1D73-443B-82E5-6817BE843E4E}.Release|x64.ActiveCfg = Release|Any CPU
+		{65964548-1D73-443B-82E5-6817BE843E4E}.Release|x64.Build.0 = Release|Any CPU
+		{65964548-1D73-443B-82E5-6817BE843E4E}.Release|x86.ActiveCfg = Release|Any CPU
+		{65964548-1D73-443B-82E5-6817BE843E4E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

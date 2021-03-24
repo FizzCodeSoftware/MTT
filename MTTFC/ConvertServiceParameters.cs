@@ -22,7 +22,7 @@
         /// <summary>
         /// Determines whether to generate numeric or string values in typescript enums
         /// </summary>
-        public EnumValues EnumValues { get; internal set; }
+        public EnumValues EnumValues { get; set; }
 
         /// <summary>
         /// Determines the naming style of the generated files and folders

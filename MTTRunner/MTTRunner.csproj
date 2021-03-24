@@ -3,11 +3,18 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
-    <IsPackable>false</IsPackable>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Description>Converts C# DTOs to Typescript Interfaces or Classes.</Description>
+    <PackageProjectUrl>https://github.com/FizzcodeSoftware/MTT</PackageProjectUrl>
+
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MTTFC\MTTFC.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE" Pack="true" PackagePath="" />
   </ItemGroup>
 
 </Project>
