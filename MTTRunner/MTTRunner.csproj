@@ -6,11 +6,13 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <Description>Converts C# DTOs to Typescript Interfaces or Classes.</Description>
     <PackageProjectUrl>https://github.com/FizzcodeSoftware/MTT</PackageProjectUrl>
-
+    
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MTTFC\MTTFC.csproj" />
+    <ProjectReference Include="..\MTTFC\MTTFC.csproj" >
+      <IncludeAssets>all</IncludeAssets>
+    </ProjectReference>
   </ItemGroup>
 
   <ItemGroup>
