@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Threading;
 
     public static class ConvertServiceConverter
@@ -167,7 +168,11 @@
                                 {
                                     if (obj.UserDefined)
                                     {
-                                        str += "new " + obj.Type + "()";
+                                        var isEnum = models.Any(m => m.IsEnum && m.Name == obj.Type);
+                                        if (isEnum)
+                                            str += "0";
+                                        else
+                                            str += "new " + obj.Type + "()";
                                     }
                                     else
                                     {
