@@ -1,4 +1,6 @@
-﻿namespace MTTFC
+﻿using System.Collections.Generic;
+
+namespace MTTFC
 {
     public class ConvertServiceParameters
     {
@@ -30,5 +32,8 @@
         public PathStyle PathStyle { get; set; }
 
         public ConvertToType ConvertToType { get; set; }
+
+        public Dictionary<string, (string type, string from)> Implements { get; set; } = new Dictionary<string, (string type, string from)>();
+        public Dictionary<string, (string type, string from)> Extends { get; set; } = new Dictionary<string, (string type, string from)>();
     }
 }

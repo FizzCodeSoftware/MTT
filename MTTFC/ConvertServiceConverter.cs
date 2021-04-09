@@ -123,15 +123,63 @@
                         }
                     }
 
+                    if (parameters.Implements.ContainsKey(file.Name)) {
+                        var implements = parameters.Implements[file.Name];
+
+                        if (string.IsNullOrEmpty(implements.from))
+                            continue;
+
+                        importing = true;
+
+                        var import = "import { " + implements.type + " } from \""
+                            + implements.from + "\";";
+                        if (!imports.Contains(import))
+                        {
+                            f.WriteLine(import);
+                            imports.Add(import);
+                        }
+                    }
+
+                    if (parameters.Extends.ContainsKey(file.Name))
+                    {
+                        var extends = parameters.Extends[file.Name];
+
+                        if (string.IsNullOrEmpty(extends.from))
+                            continue;
+
+                        importing = true;
+
+                        var import = "import { " + extends.type + " } from \""
+                            + extends.from + "\";";
+                        if (!imports.Contains(import))
+                        {
+                            f.WriteLine(import);
+                            imports.Add(import);
+                        }
+                    }
+
                     if (importing)
                     {
                         f.WriteLine("");
                     }
 
+                    if (!string.IsNullOrEmpty(file.Inherits)
+                        && parameters.Extends.ContainsKey(file.Name))
+                    {
+                        throw new InvalidOperationException($"Class cannot be inherited and Extended. File name: {file.Name}, inherits: {file.Inherits}, Extends: {parameters.Extends[file.Name]} ");
+                    }
+
+                    string inherits = null;
+                    if (!string.IsNullOrEmpty(file.Inherits))
+                        inherits = file.Inherits;
+                    else if(parameters.Extends.ContainsKey(file.Name))
+                        inherits = parameters.Extends[file.Name].type;
+
                     f.WriteLine(
                         (parameters.ConvertToType == ConvertToType.Interface ? "export interface " : "export class ")
                         + file.Name
-                        + (string.IsNullOrEmpty(file.Inherits) ? "" : (" extends " + file.Inherits)) //if class has inheritance
+                        + (string.IsNullOrEmpty(inherits) ? "" : (" extends " + inherits)) //if class has inheritance
+                        + (!parameters.Implements.ContainsKey(file.Name) ? "" : (" implements " + parameters.Implements[file.Name].type))
                         + " {"
                         );
 
