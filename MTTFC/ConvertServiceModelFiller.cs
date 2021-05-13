@@ -376,7 +376,7 @@
                 type.Contains("Array") ||
                 type.Contains("Enumerable") ||
                 type.Contains("Collection") ||
-                type.Contains("List");
+                type.StartsWith("List");
         }
 
         private static bool CheckOptional(string type)
