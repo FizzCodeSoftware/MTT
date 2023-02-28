@@ -28,6 +28,7 @@
                     + ".ts";
                 log("Creating file {0}", fileName);
                 string saveDir = Path.Combine(di.FullName, fileName);
+                log("Save path is {0}", saveDir);
 
                 using var stream = GetStream(saveDir, 0);
                 using var f =
