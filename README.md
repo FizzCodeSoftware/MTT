@@ -6,8 +6,10 @@ MTT generates TypeScript interfaces from .NET DTOs. It implements most major fea
 
 Using dotnet CLI:
 
-`dotnet add package MTT`
+`dotnet add package MTTRunner`
 
+(The original package name is MTT.)
+  
 `dotnet restore`
 
 Then in .csproj add a Target.
