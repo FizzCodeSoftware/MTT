@@ -310,7 +310,7 @@
 
         private static bool IsContructor(string line)
         {
-            return !StrictContains(line, "new") && (line.Contains("()") || (line.Contains("(") && line.Contains(")")));
+            return !StrictContains(line, "=>") && !StrictContains(line, "new") && (line.Contains("()") || (line.Contains("(") && line.Contains(")")));
         }
 
         private static string Find(List<ModelFile> models, string query, ModelFile file, string localWorkingDir)
