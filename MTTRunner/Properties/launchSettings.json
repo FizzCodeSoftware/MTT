@@ -2,7 +2,8 @@
   "profiles": {
     "MTTRunner": {
       "commandName": "Project",
-      "commandLineArgs": "..\\..\\..\\..\\Example\\Resources GeneratedTypescript Class Default Kebab true true"
+      "commandLineArgsX": "..\\..\\..\\..\\Example\\Resources GeneratedTypescript Class Default Kebab true true",
+      "commandLineArgs": "..\\..\\..\\..\\Example\\Resources GeneratedTypescript Class Default Kebab true true true ../extension/property-bag-of"
     }
   }
 }

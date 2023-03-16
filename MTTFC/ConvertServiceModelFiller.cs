@@ -8,7 +8,7 @@
 
     public static class ConvertServiceModelFiller
     {
-        public static void BreakDown(List<ModelFile> models, string localWorkingDir, bool isModelInTSFileName)
+        public static void BreakDown(List<ModelFile> models, string localWorkingDir, bool isModelInTSFileName, bool isDictAsPropertyBagOf, string pathOfPropertyBagOf)
         {
             foreach (var file in models)
             {
@@ -129,7 +129,12 @@
                             type = modLine[0];
                         }
 
+                        int arrayDimensions = GetArrayDimensions(type);
+
                         bool isArray = CheckIsArray(type);
+
+                        if (arrayDimensions > 0)
+                            isArray = true;
 
                         bool isOptional = CheckOptional(type);
 
@@ -157,6 +162,15 @@
 
                             List<string> types = CleanType(type).Replace("Dictionary", String.Empty).Replace("IDictionary", String.Empty).Split(',').ToList();
                             types.ForEach(x => x.Trim());
+
+                            if (isDictAsPropertyBagOf && types[0] == "string") {
+                                obj.Type = "PropertyBagOf<" + TypeOf(types[1]) + ">"  ;
+                                obj.DifferentTypeToImport = "PropertyBagOf";
+                                types = new List<string>();
+                                obj.Container = new LineObject[0];
+                                obj.UserDefined = true;
+                                obj.UserDefinedImport = pathOfPropertyBagOf;
+                            }
 
                             int index = 0;
                             foreach (string t in types)
@@ -203,6 +217,7 @@
                                 VariableName = varName,
                                 Type = typeToObject,
                                 IsArray = isArray,
+                                ArrayDimensions = arrayDimensions,
                                 IsOptional = isOptional,
                                 UserDefined = isUserDefined,
                                 UserDefinedImport = userDefinedImport + (isModelInTSFileName ? ".model" : "")
@@ -213,6 +228,21 @@
                     }
                 }
             }
+        }
+
+        private static int GetArrayDimensions(string typePart)
+        {
+            int numOfCommas = 0;
+            if (typePart.Contains('[')
+                && typePart.EndsWith(']'))
+            {
+                int startOfArray = typePart.IndexOf('[');
+                var commas = typePart.Substring(startOfArray + 1, typePart.Length - startOfArray - 2);
+                numOfCommas = commas.Length;
+            }
+
+            return numOfCommas;
+               
         }
 
         private static string StripComments(string line)

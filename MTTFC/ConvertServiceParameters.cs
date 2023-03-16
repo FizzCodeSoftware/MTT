@@ -35,5 +35,8 @@ namespace MTTFC
 
         public Dictionary<string, (string type, string from)> Implements { get; set; } = new Dictionary<string, (string type, string from)>();
         public Dictionary<string, (string type, string from)> Extends { get; set; } = new Dictionary<string, (string type, string from)>();
+
+        public bool IsDictAsPropertyBagOf { get; set; }
+        public string PathOfPropertyBagOf { get; set; }
     }
 }

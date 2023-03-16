@@ -94,7 +94,7 @@
                         if (obj.UserDefined)
                         {
                             importing = true;
-                            var import = "import { " + obj.Type + " } from \""
+                            var import = "import { " + (obj.DifferentTypeToImport ?? obj.Type) + " } from \""
                                 + (parameters.PathStyle == PathStyle.Kebab ? ConvertServiceHelper.ToKebabCasePath(obj.UserDefinedImport) : obj.UserDefinedImport) + "\";";
 
                             if (!imports.Contains(import))
@@ -204,8 +204,11 @@
                                 + ConvertServiceHelper.ToCamelCase(obj.VariableName)
                                 + (obj.IsOptional ? "?" : string.Empty)
                                 + ": "
-                                + obj.Type
-                                + (obj.IsArray ? "[]" : string.Empty);
+                                + obj.Type;
+
+                            if (obj.IsArray)
+                                str += string.Concat(Enumerable.Repeat("[]", obj.ArrayDimensions + 1));
+
                             if (!obj.IsOptional && parameters.ConvertToType == ConvertToType.Class)
                             {
                                 str += " = ";
