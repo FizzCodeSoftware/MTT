@@ -209,7 +209,8 @@
                             if (obj.IsArray)
                                 str += string.Concat(Enumerable.Repeat("[]", obj.ArrayDimensions + 1));
 
-                            if (!obj.IsOptional && parameters.ConvertToType == ConvertToType.Class)
+                            if (parameters.ConvertToType == ConvertToType.Class
+                                && !(obj.IsOptional || (obj.Type == "any" && !obj.IsArray)))
                             {
                                 str += " = ";
                                 if (obj.IsArray)
