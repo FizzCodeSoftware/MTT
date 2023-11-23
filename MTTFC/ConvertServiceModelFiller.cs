@@ -8,7 +8,7 @@
 
     public static class ConvertServiceModelFiller
     {
-        public static void BreakDown(List<ModelFile> models, string localWorkingDir, bool isModelInTSFileName, bool isDictAsPropertyBagOf, string pathOfPropertyBagOf)
+        public static void BreakDown(List<ModelFile> models, string localWorkingDir, bool isModelInTSFileName)
         {
             foreach (var file in models)
             {
@@ -149,48 +149,32 @@
                                 varName = varName[0..^1];
                             }
 
+                            List<string> types = CleanType(type)
+                                .Replace("Dictionary", String.Empty)
+                                .Replace("IDictionary", String.Empty)
+                                .Split(',')
+                                .Select(x => x.Trim())
+                                .ToList();
+
+                            var elementType = CleanType(types[1]);
+
+                            var userDefinedImport = Find(models, elementType, file, localWorkingDir);
+                            var isUserDefined = !String.IsNullOrEmpty(userDefinedImport);
+
                             var obj = new LineObject()
                             {
                                 VariableName = varName,
-                                Type = "Map",
+                                Type = "{[index: string]: " + (isUserDefined ? elementType : TypeOf(elementType)) + "}",
                                 IsArray = false,
-                                IsOptional = isOptional,
-                                UserDefined = false,
-                                UserDefinedImport = "",
-                                Container = new LineObject[2]
+                                IsOptional = true,
+                                UserDefined = isUserDefined,
+                                UserDefinedImport = userDefinedImport != null
+                                    ? userDefinedImport + (isModelInTSFileName ? ".model" : "")
+                                    : null,
+                                DifferentTypeToImport = userDefinedImport != null
+                                    ? elementType
+                                    : null,
                             };
-
-                            List<string> types = CleanType(type).Replace("Dictionary", String.Empty).Replace("IDictionary", String.Empty).Split(',').ToList();
-                            types.ForEach(x => x.Trim());
-
-                            if (isDictAsPropertyBagOf && types[0] == "string") {
-                                obj.Type = "PropertyBagOf<" + TypeOf(types[1]) + ">"  ;
-                                obj.DifferentTypeToImport = "PropertyBagOf";
-                                types = new List<string>();
-                                obj.Container = new LineObject[0];
-                                obj.UserDefined = true;
-                                obj.UserDefinedImport = pathOfPropertyBagOf;
-                            }
-
-                            int index = 0;
-                            foreach (string t in types)
-                            {
-                                string innerType = CleanType(t);
-
-                                var userDefinedImport = Find(models, innerType, file, localWorkingDir);
-                                var isUserDefined = !String.IsNullOrEmpty(userDefinedImport);
-
-                                obj.Container[index] = new LineObject()
-                                {
-                                    VariableName = "",
-                                    Type = isUserDefined ? innerType : TypeOf(innerType),
-                                    IsArray = false,
-                                    IsOptional = false,
-                                    UserDefined = isUserDefined,
-                                    UserDefinedImport = userDefinedImport + (isModelInTSFileName ? ".model" : "")
-                                };
-                                index++;
-                            }
 
                             file.Objects.Add(obj);
                         }

@@ -36,13 +36,11 @@
                 IsModelInTSFileName = OriginalParameters.IsModelInTSFileName,
                 Extends = OriginalParameters.Extends,
                 Implements = OriginalParameters.Implements,
-                IsDictAsPropertyBagOf = OriginalParameters.IsDictAsPropertyBagOf,
-                PathOfPropertyBagOf = OriginalParameters.PathOfPropertyBagOf
             };
 
             var models = ConvertServiceModelLoader.GetModels(parameters.WorkingDirectory, parameters.WorkingDirectory);
 
-            ConvertServiceModelFiller.BreakDown(models, parameters.WorkingDirectory, parameters.IsModelInTSFileName, parameters.IsDictAsPropertyBagOf, parameters.PathOfPropertyBagOf);
+            ConvertServiceModelFiller.BreakDown(models, parameters.WorkingDirectory, parameters.IsModelInTSFileName);
             ConvertServiceConverter.Convert(Log, models, parameters);
 
             Log("Finished MTT ConvertService");

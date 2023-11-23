@@ -1,8 +1,8 @@
 ﻿namespace MTTRunner.Tests
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using System.IO;
     using System;
+    using System.IO;
 
     [TestClass]
     public class ProgramTests
@@ -107,11 +107,11 @@
         }
 
         [TestMethod]
-        public void CheckMapExists()
+        public void CheckDictionary()
         {
             string[] lines = File.ReadAllLines(VehicleFile);
 
-            Assert.AreEqual("    options: Map<string, Units>;", lines[12]);
+            Assert.AreEqual("    options?: {[index: string]: Units};", lines[12]);
         }
 
         [TestMethod]
