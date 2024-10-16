@@ -1,15 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/FizzcodeSoftware/MTT</PackageProjectUrl>
     <Description>Converts C# DTOs to Typescript Interfaces or Classes.</Description>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Build.Framework" Version="16.9.0" />
-    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="16.9.0" />
+    <PackageReference Include="Microsoft.Build.Framework" Version="17.11.4" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="17.11.4" />
   </ItemGroup>
 
   <ItemGroup>

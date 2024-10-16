@@ -54,14 +54,13 @@
                 if (!Directory.Exists(localdir))
                 {
                     log("Convert Directory does not exist {0}, creating..", localdir);
+                    Directory.CreateDirectory(localdir).Create();
                 }
                 else
                 {
                     log("Convert Directory {0}", localdir);
-                    DeleteDirectory(localdir, 0);
                 }
 
-                Directory.CreateDirectory(localdir).Create();
                 return localdir;
             }
         }
@@ -101,7 +100,8 @@
                     isCaps = false;
             }
 
-            if (isCaps) return str.ToLower();
+            if (isCaps)
+                return str.ToLower();
 
             return char.ToLowerInvariant(str[0]) + str[1..];
         }

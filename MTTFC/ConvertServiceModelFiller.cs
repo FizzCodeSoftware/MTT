@@ -226,7 +226,7 @@
             }
 
             return numOfCommas;
-               
+
         }
 
         private static string StripComments(string line)
@@ -285,7 +285,8 @@
                 case "DateTime":
                     return "Date";
 
-                default: return "any";
+                default:
+                    return "any";
             }
         }
 
@@ -313,10 +314,12 @@
         private static bool IsEnumObject(string line)
         {
             return
-                !String.IsNullOrWhiteSpace(line)
+                !string.IsNullOrWhiteSpace(line)
                 && !StrictContains(line, "enum")
                 && !StrictContains(line, "namespace")
                 && !StrictContains(line, "using")
+                && !StrictContains(line, "#region")
+                && !StrictContains(line, "#endregion")
                 && !IsContructor(line)
                 && !line.Contains("{") && !line.Contains("}")
                 && !line.Contains("[") && !line.Contains("]");
