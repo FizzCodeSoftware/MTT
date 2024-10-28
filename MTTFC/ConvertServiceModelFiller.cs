@@ -398,7 +398,7 @@
 
         private static bool CheckOptional(string type)
         {
-            return type.Contains("?");
+            return type.Contains("?") && !type.Contains("[]");
         }
 
         private static bool CheckDictionary(string type)
